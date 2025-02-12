@@ -1,0 +1,27 @@
+class Solution {
+    public int gds(int num)
+    {
+        int sum=0;
+        while(num>0)
+        {
+            sum+=(num%10);
+            num/=10;
+        }
+        return sum;
+    }
+    public int maximumSum(int[] nums) {
+        int n=nums.length;
+        int result=-1;
+        HashMap<Integer, Integer> map=new HashMap<>();
+        for(int i=0;i<n;i++)
+        {
+            int x=gds(nums[i]);
+            if(map.containsKey(x))
+            {
+                result=Math.max(result,nums[i]+map.get(x));
+            }
+            map.put(x,Math.max(map.getOrDefault(x,0),nums[i]));
+        }
+        return result;
+    }
+}
